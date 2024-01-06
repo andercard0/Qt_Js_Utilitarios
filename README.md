@@ -3,4 +3,5 @@
 Pequeno script em Javascript para tradução automática de arquivos do tipo .TS oriundas do programa Qt Linguist.
 
 <h5>Dependencias necessárias:</h5>
-- npm install xml2js
+- npm install xml2js <br>
+- Chave API Google : https://cloud.google.com/docs/authentication/api-keys?hl=pt-br
