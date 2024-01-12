@@ -1,4 +1,4 @@
-<h1> Qt Ts Files Utilitários</h1>
+<h1> Qt Ts Utilitários</h1>
 
 Pequeno script em Javascript para tradução automática de arquivos do tipo .TS oriundas do programa Qt Linguist.
 
