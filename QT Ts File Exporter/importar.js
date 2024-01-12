@@ -1,19 +1,18 @@
 const fs = require('fs');
 
-const nomeArquivoStrings = 'strings.txt'; // Arquivo strings.txt
-const nomeArquivoTS = 'pcsx2-qt_en.ts'; // Arquivo .ts a ser atualizado com traduções
+const nomeArquivoStrings = 'strings.txt';
+const nomeArquivoTS = 'InsirOSeuArquivoQt_EnAqui.ts';
 
-// Lê o conteúdo do arquivo 'strings.txt'
 fs.readFile(nomeArquivoStrings, 'utf8', (err, data) => {
     if (err) {
         console.error('Ocorreu um erro ao ler o arquivo strings.txt:', err);
         return;
     }
 
-    // Expressão regular para identificar o padrão de <translation>
+    // Regex para identificar o padrão na etiqueta <translation>
     const regex = /<translation type="(.*?)">(.*?)<\/translation>/g;
 
-    // Mapeia as correspondências de <translation> no conteúdo do arquivo strings.txt
+    // Mapeamento no arquivo strings.txt
     const translationsMap = new Map();
     let match;
     while ((match = regex.exec(data)) !== null) {
@@ -34,6 +33,7 @@ fs.readFile(nomeArquivoStrings, 'utf8', (err, data) => {
         });
 
         // Escreve as alterações de volta no arquivo .ts
+        // Faltam alguns ajustes aqui, lembrete: avaliar uma solução melhor as vezes a depender do tamanho da linha acaba quebrando o arquivo original : /
         fs.writeFile(nomeArquivoTS, tsData, (err) => {
             if (err) {
                 console.error('Ocorreu um erro ao escrever no arquivo .ts:', err);
