@@ -2,17 +2,14 @@ const fs = require('fs');
 const { parseString, Builder } = require('xml2js');
 const { Translate } = require('@google-cloud/translate').v2;
 
-// Insira sua chave de API do Google Cloud Translation aqui
+// Insira sua chave de API do Google cloud translation aqui
 const API_KEY = 'AIzaSyBoijTYcUs1uvQYIe3fw5oo47Lv6NRHMzw';
-
-// Crie uma instância do cliente Translate com a chave de API
 const translate = new Translate({ key: API_KEY });
 
-// Definindo o idioma de origem (inglês) e o idioma de destino (português)
+// Origem e Destino
 const sourceLanguage = 'en';
 const targetLanguage = 'pt';
 
-// Função tradução do translate
 async function translateText(text) {
     try {
         const [translation] = await translate.translate(text, {
@@ -22,18 +19,16 @@ async function translateText(text) {
         return translation;
     } catch (error) {
         console.error('Erro na tradução:', error);
-        return text; // retorna o texto original caso algo dê errado
+        return text;
     }
 }
 
-// Lê o arquivo .ts
 fs.readFile('pcsx2-qt_en.ts', 'utf8', async (err, data) => {
     if (err) {
         console.error('Erro ao ler o arquivo:', err);
         return;
     }
 
-    // Converter o XML
     parseString(data, async (err, result) => {
         if (err) {
             console.error('Erro ao analisar o XML:', err);
@@ -49,7 +44,6 @@ fs.readFile('pcsx2-qt_en.ts', 'utf8', async (err, data) => {
             message.translation[0] = translatedText;
         }
 
-        // Convertendo o objeto para XML
         const builder = new Builder();
         const xml = builder.buildObject(result);
 
